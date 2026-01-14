@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cinema PHOVL</title>
+
+  <style>
+    :root {
+      --morado1: #3d0066;
+      --morado2: #24003d;
+      --morado3: #1a002b;
+      --dorado: #f6c90e;
+      --radius: 14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, var(--morado1), var(--morado2), var(--morado3));
+      background-size: cover;
+      background-attachment: fixed;
+      color: white;
+    }
+
+    
+    .center-wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    
+    .card {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 0;
+    }
+
+    
+    h1 {
+      margin: 0;
+      font-size: 60px;
+      color: var(--dorado);
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 3px;
+      -webkit-text-stroke: 3px black;
+      text-stroke: 3px black;
+      transform: perspective(800px) rotateX(15deg); 
+    }
+
+    
+    h2.subtitle {
+      margin: 8px 0 20px;
+      font-size: 26px;
+      color: var(--dorado);
+      font-weight: 800;
+      text-transform: uppercase;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
+    }
+
+    
+    p.lead {
+      margin: 0 0 20px;
+      color: var(--dorado);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    
+    .form-group {
+      margin-bottom: 18px;
+      width: 100%;
+      text-align: left;
+    }
+
+    label {
+      color: var(--dorado);
+      font-size: 15px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      border: 2px solid var(--dorado);
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      outline: none;
+      display: block;
+    }
+
+    input::placeholder {
+      color: #ffeaa7;
+      font-weight: bold;
+    }
+
+    /* BOTONES */
+    .btn {
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--dorado);
+      color: black;
+      border: 2px solid black;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--dorado);
+      color: var(--dorado);
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: var(--dorado);
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--dorado);
+    }
+
+    @media (max-width:420px) {
+      h1 { font-size: 48px; }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="center-wrap">
+    <main class="card">
+
+      <h1>Cinema PHOVL</h1>
+      <h2 class="subtitle">Bienvenidos</h2>
+
+      <p class="lead">Inicia sesión con tu cuenta o regístrate si aún no tienes una.</p>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input id="email" type="email" placeholder="tu@ejemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input id="password" type="password" placeholder="••••••" required>
+        </div>
+
+        <div class="links">
+          <label><input type="checkbox"> Recuérdame</label>
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+        <button class="btn btn-secondary" type="button" onclick="handleRegister()">Registrarse</button>
+
+      </form>
+
+    </main>
+  </div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      window.location.href = "Pagina Principal.html";
+    }
+
+    function handleRegister() {
+      window.location.href = "register.html";
+    }
+  </script>
+
+</body>
+
+</html>
