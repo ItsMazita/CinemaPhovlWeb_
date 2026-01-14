@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Seleccionar Asientos - Cinema PHOVL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  :root{
+    --bg:#3d0652;           
+    --sidebar:#f1e208;      
+    --radius:12px;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:white;
+    display:flex;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:240px;
+    background:var(--sidebar);
+    padding:20px 0;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    border-right:4px solid black;
+  }
+
+  .sidebar a{
+    padding:10px 20px;
+    display:block;
+    color:black;
+    font-weight:bold;
+    text-decoration:none;
+  }
+
+  /* Contenido */
+  .container{
+    margin-left:260px;
+    padding:20px;
+    width:calc(100% - 260px);
+  }
+
+  h2{
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  .info-boletos{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:20px;
+  }
+
+  /* Pantalla */
+  .screen{
+    width:70%;
+    background:white;
+    color:black;
+    margin:auto;
+    text-align:center;
+    padding:10px;
+    border-radius:20px;
+    font-weight:bold;
+    margin-top:10px;
+    margin-bottom:35px;
+    box-shadow:0 0 20px #fff;
+  }
+
+  /* Sala RECTANGULAR */
+  #sala{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .fila{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:10px;
+    gap:10px;
+  }
+
+  .fila-label{
+    width:40px;
+    color:#f1e208;
+    font-weight:bold;
+    text-align:center;
+    margin-right:10px;
+    font-size:18px;
+  }
+
+  .seat{
+    width:35px;
+    height:35px;
+    background:#666;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:6px;
+    cursor:pointer;
+    user-select:none;
+    border:2px solid black;
+    color:white;
+    font-size:13px;
+    transition:0.2s;
+  }
+
+  .seat:hover{
+    transform:scale(1.15);
+  }
+
+  .selected{
+    background:#ffd700;
+  }
+
+  .occupied{
+    background:red !important;
+    cursor:not-allowed;
+  }
+
+  .btn-confirmar{
+    margin-top:35px;
+    width:60%;
+    margin-left:20%;
+    padding:12px;
+    font-size:18px;
+    font-weight:bold;
+    background:var(--sidebar);
+    color:black;
+    border:2px solid black;
+    border-radius:10px;
+    cursor:pointer;
+  }
+
+  #leyenda{
+    text-align:center;
+    margin-top:30px;
+    font-size:18px;
+  }
+
+  #leyenda div{
+    margin:6px;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <a href="Pagina Principal.html">Inicio</a>
+  <a href="pagina_boletos.html">Volver</a>
+</div>
+
+<!-- Contenido -->
+<div class="container">
+
+  <h2>Selecciona tus Asientos</h2>
+
+  <div class="info-boletos" id="infoBoletos"></div>
+
+  <div class="screen">PANTALLA</div>
+
+  <div id="sala"></div>
+
+  <div id="leyenda">
+    <div style=color:red> Ocupado</div>
+    <div style="color:#666"> Disponible</div>
+  </div>
+
+  <button class="btn-confirmar" onclick="confirmar()">Confirmar Asientos</button>
+
+</div>
+
+<script>
+
+//  CONFIGURACIÓN DE SALA (12 EN TODAS)
+
+
+const distribucion = {
+  "A": 12,
+  "B": 12,
+  "C": 12,
+  "D": 12,
+  "E": 12,
+  "F": 12,
+  "G": 12,
+  "H": 12,
+  "I": 12,
+  "J": 12,
+  "K": 12,
+  "L": 12
+};
+
+
+// INFO BOLETOS
+
+
+const datos = JSON.parse(localStorage.getItem("boletos")) || {ninos:0, adultos:0, estudiantes:0, mayores:0};
+const total = (+datos.ninos) + (+datos.adultos) + (+datos.estudiantes) + (+datos.mayores);
+
+document.getElementById("infoBoletos").textContent =
+  "Boletos seleccionados: " + total;
+
+let ocupados = JSON.parse(localStorage.getItem("asientosOcupados")) || [];
+let seleccionados = [];
+
+//  GENERAR SALA
+function generarSala(){
+  const sala = document.getElementById("sala");
+
+  for(const fila in distribucion){
+    const numAsientos = distribucion[fila];
+
+    const filaDiv = document.createElement("div");
+    filaDiv.classList.add("fila");
+
+    const label = document.createElement("span");
+    label.classList.add("fila-label");
+    label.textContent = fila;
+    filaDiv.appendChild(label);
+
+    for(let n=1; n<=numAsientos; n++){
+      const seat = document.createElement("div");
+      seat.classList.add("seat");
+      seat.textContent = n;
+
+      const id = `${fila}${n}`;
+      seat.dataset.id = id;
+
+      if(ocupados.includes(id)){
+        seat.classList.add("occupied");
+      }
+
+      seat.onclick = ()=>toggleSeat(seat);
+
+      filaDiv.appendChild(seat);
+    }
+
+    sala.appendChild(filaDiv);
+  }
+}
+
+//  SELECCIÓN
+function toggleSeat(seat){
+  const id = seat.dataset.id;
+
+  if(seat.classList.contains("occupied"))
+    return;
+
+  if(seat.classList.contains("selected")){
+    seat.classList.remove("selected");
+    seleccionados = seleccionados.filter(s=>s!==id);
+  } else {
+    if(seleccionados.length < total){
+      seat.classList.add("selected");
+      seleccionados.push(id);
+    }
+  }
+}
+
+//  CONFIRMAR
+
+function confirmar(){
+  if(seleccionados.length !== total){
+    alert("Debe seleccionar exactamente " + total + " asientos.");
+    return;
+  }
+
+  localStorage.setItem("asientosTemporal", JSON.stringify(seleccionados));
+
+  window.location.href = "pago.html";
+}
+
+generarSala();
+</script>
+
+</body>
+</html>

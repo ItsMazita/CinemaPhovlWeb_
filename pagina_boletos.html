@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestión de Boletos - Cinema PHOVL</title>
+
+<style>
+  :root{
+    --bg:#3d0652;           
+    --sidebar:#f1e208;      
+    --radius:12px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color:white;
+    display:flex;
+  }
+
+  /* SIDEBAR */
+  .sidebar{
+    width:240px;
+    background:var(--sidebar);
+    color:black;
+    padding:20px 0;
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    overflow:hidden;
+    transition:width .4s ease;
+    border-right:4px solid black;
+  }
+
+  .sidebar.collapsed{
+    width:58px;
+  }
+
+  .sidebar .logo{
+    font-size:22px;
+    font-weight:700;
+    padding-left:20px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    white-space:nowrap;
+    color:black;
+  }
+
+  .menu-items{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding-top:10px;
+    padding-bottom:20px;
+    transition:opacity .4s ease;
+  }
+
+  .menu-items.hidden{
+    opacity:0;
+    pointer-events:none;
+  }
+
+  .sidebar a{
+    width:100%;
+    padding:12px 20px;
+    font-size:15px;
+    color:black;
+    text-decoration:none;
+    font-weight:600;
+  }
+
+  .sidebar a:hover{
+    background:#53004f;
+    color:var(--sidebar);
+  }
+
+  /* CONTENIDO */
+  .container{
+    margin-left:260px;
+    padding:24px;
+    width:calc(100% - 260px);
+    transition:margin-left .4s ease, width .4s ease;
+  }
+
+  .sidebar.collapsed + .container{
+    margin-left:80px;
+    width:calc(100% - 80px);
+  }
+
+  h2{
+    text-align:center;
+    font-size:30px;
+    color:white;
+    text-shadow:2px 2px 5px black;
+  }
+
+  /* CAJA DE BOLETOS */
+  .ticket-box{
+    background:#4b0a63;
+    width:60%;
+    margin:auto;
+    margin-top:30px;
+    padding:25px;
+    border-radius:15px;
+    border:3px solid var(--sidebar);
+    box-shadow:0 0 10px black;
+  }
+
+  .ticket-section{
+    text-align:center;
+    margin-bottom:45px;
+  }
+
+  .ticket-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:5px;
+  }
+
+  .ticket-price{
+    font-size:18px;
+    opacity:0.8;
+  }
+
+  .ticket-subtotal{
+    margin-top:5px;
+    font-size:18px;
+    font-weight:bold;
+    color:#ffe97f;
+  }
+
+  .ticket-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    margin-top:10px;
+  }
+
+  .arrow-btn{
+    font-size:32px;
+    background:var(--sidebar);
+    border:2px solid black;
+    border-radius:12px;
+    padding:10px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.2s;
+  }
+
+  .arrow-btn:hover{
+    background:white;
+  }
+
+  .ticket-value{
+    font-size:28px;
+    font-weight:bold;
+    width:50px;
+    text-align:center;
+    pointer-events:none;
+  }
+
+  /* TOTAL */
+  .total{
+    text-align:center;
+    font-size:26px;
+    margin-bottom:20px;
+    font-weight:bold;
+    padding:10px;
+    border-radius:10px;
+    background:#3a074d;
+    border:2px solid var(--sidebar);
+  }
+
+  .btn-continuar{
+    width:100%;
+    padding:12px;
+    background:var(--sidebar);
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:black;
+    cursor:pointer;
+    margin-top:10px;
+    border:2px solid black;
+  }
+
+  .btn-continuar:hover{
+    background:white;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebarPanel">
+  <div class="logo" id="toggleMenu">🎬 Cinema PHOVL</div>
+
+  <div class="menu-items" id="menuItems">
+    <a href="Pagina Principal.html">Inicio</a>
+    <a href="sucursal1.html">Volver a Sucursal</a>
+    <a href="index.html">Cerrar sesión</a>
+  </div>
+</div>
+
+<!-- CONTENIDO -->
+<div class="container">
+  <h2>Gestión de Boletos</h2>
+
+  <div class="ticket-box">
+
+    <!-- TOTAL -->
+    <div id="total" class="total">$0 MXN</div>
+
+    <!-- NIÑOS -->
+    <div class="ticket-section">
+      <div class="ticket-title">Niños</div>
+      <div class="ticket-price">$55 c/u</div>
+      <div id="sub_ninos" class="ticket-subtotal">Subtotal: $0 MXN</div>
+
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('ninos', -1)">➖</button>
+        <span id="ninos" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('ninos', 1)">➕</button>
+      </div>
+    </div>
+
+    <!-- ADULTOS -->
+    <div class="ticket-section">
+      <div class="ticket-title">Adultos</div>
+      <div class="ticket-price">$85 c/u</div>
+      <div id="sub_adultos" class="ticket-subtotal">Subtotal: $0 MXN</div>
+
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('adultos', -1)">➖</button>
+        <span id="adultos" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('adultos', 1)">➕</button>
+      </div>
+    </div>
+
+    <!-- ESTUDIANTES -->
+    <div class="ticket-section">
+      <div class="ticket-title">Estudiantes</div>
+      <div class="ticket-price">$65 c/u</div>
+      <div id="sub_estudiantes" class="ticket-subtotal">Subtotal: $0 MXN</div>
+
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('estudiantes', -1)">➖</button>
+        <span id="estudiantes" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('estudiantes', 1)">➕</button>
+      </div>
+    </div>
+
+    <!-- ADULTOS MAYORES -->
+    <div class="ticket-section">
+      <div class="ticket-title">Adultos Mayores</div>
+      <div class="ticket-price">$60 c/u</div>
+      <div id="sub_mayores" class="ticket-subtotal">Subtotal: $0 MXN</div>
+
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('mayores', -1)">➖</button>
+        <span id="mayores" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('mayores', 1)">➕</button>
+      </div>
+    </div>
+
+    <button class="btn-continuar" onclick="guardarBoletos()">Continuar a Selección de Asientos</button>
+  </div>
+</div>
+
+<script>
+  const precios = {
+    ninos: 55,
+    adultos: 85,
+    estudiantes: 65,
+    mayores: 60
+  };
+
+  const toggleLogo = document.getElementById("toggleMenu");
+  const menuItems = document.getElementById("menuItems");
+  const sidebarPanel = document.getElementById("sidebarPanel");
+
+  toggleLogo.onclick = ()=>{
+    menuItems.classList.toggle("hidden");
+    sidebarPanel.classList.toggle("collapsed");
+  };
+
+  function cambiar(id, amount){
+    const span = document.getElementById(id);
+    let valor = parseInt(span.textContent);
+
+    valor += amount;
+    if(valor < 0) valor = 0;
+
+    span.textContent = valor;
+
+    actualizarSubtotales();
+    actualizarTotal();
+  }
+
+  function actualizarSubtotales(){
+    document.getElementById("sub_ninos").textContent =
+      "Subtotal: $" + (parseInt(ninos.textContent) * precios.ninos) + " MXN";
+
+    document.getElementById("sub_adultos").textContent =
+      "Subtotal: $" + (parseInt(adultos.textContent) * precios.adultos) + " MXN";
+
+    document.getElementById("sub_estudiantes").textContent =
+      "Subtotal: $" + (parseInt(estudiantes.textContent) * precios.estudiantes) + " MXN";
+
+    document.getElementById("sub_mayores").textContent =
+      "Subtotal: $" + (parseInt(mayores.textContent) * precios.mayores) + " MXN";
+  }
+
+  function actualizarTotal(){
+    let total = 
+      parseInt(ninos.textContent) * precios.ninos +
+      parseInt(adultos.textContent) * precios.adultos +
+      parseInt(estudiantes.textContent) * precios.estudiantes +
+      parseInt(mayores.textContent) * precios.mayores;
+
+    document.getElementById("total").textContent = `$${total} MXN`;
+  }
+
+  function guardarBoletos(){
+    const datos = {
+      ninos: parseInt(document.getElementById("ninos").textContent),
+      adultos: parseInt(document.getElementById("adultos").textContent),
+      estudiantes: parseInt(document.getElementById("estudiantes").textContent),
+      mayores: parseInt(document.getElementById("mayores").textContent)
+    };
+
+    localStorage.setItem("boletos", JSON.stringify(datos));
+    window.location.href = "seleccion_asientos.html";
+  }
+</script>
+
+</body>
+</html>
