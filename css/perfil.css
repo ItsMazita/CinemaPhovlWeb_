@@ -1,0 +1,131 @@
+    :root{
+      --morado:#3d0652;
+      --dorado:#f1e208;
+      --tarjeta:#4a0a69;
+      --texto:#ffffff;
+      --muted:#c7c7c7;
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+
+    body{
+      margin:0;
+      background: var(--morado);
+      color: var(--texto);
+    }
+
+    
+    header{
+      background: var(--dorado);
+      color:#000;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-weight:bold;
+    }
+
+    header .logo{
+      font-size:26px;
+      font-weight:900;
+      color:#000;
+    }
+
+    nav{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    nav a{
+      color:#000;
+      text-decoration:none;
+      font-size:15px;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:8px;
+      transition:0.3s ease;
+    }
+
+    nav a:hover{
+      background:#000;
+      color:var(--dorado);
+    }
+
+    
+    .container{
+      max-width:850px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    h2{
+      text-align:center;
+      font-size:26px;
+      margin-bottom:20px;
+      color:var(--dorado);
+    }
+
+    .profile-card{
+      background: var(--tarjeta);
+      padding:25px;
+      border-radius:var(--radius);
+      box-shadow:0 0 18px rgba(0,0,0,0.25);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .profile-card h3{
+      margin:0;
+      font-size:20px;
+      font-weight:700;
+      color:var(--dorado);
+    }
+
+    .profile-card p{
+      margin:0;
+      font-size:16px;
+      color:var(--muted);
+    }
+
+    .history h4{
+      margin-bottom:6px;
+      font-size:18px;
+      color:var(--dorado);
+    }
+
+    .history ul{
+      list-style:none;
+      padding:0;
+    }
+
+    .history ul li{
+      background:#2a0242;
+      border-left:4px solid var(--dorado);
+      margin-bottom:6px;
+      padding:8px 12px;
+      border-radius:8px;
+      font-size:15px;
+    }
+
+    
+    .btn{
+      margin-top:10px;
+      align-self:center;
+      padding:10px 14px;
+      font-size:16px;
+      border:0;
+      background: var(--dorado);
+      color:#000;
+      font-weight:800;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s ease;
+    }
+
+    .btn:hover{
+      background:#000;
+      color:var(--dorado);
+      box-shadow:0 0 14px rgba(241, 226, 8, 0.6);
+    }

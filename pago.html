@@ -3,130 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Pago de Boletos - Cinema PHOVL</title>
+<link rel="stylesheet" href="css/pago.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-  :root{
-    --bg:#3d0652;           
-    --sidebar:#f1e208;      
-    --radius:12px;
-  }
-
-  body{
-    margin:0;
-    background:var(--bg);
-    color:white;
-    display:flex;
-    font-family: Arial, sans-serif;
-  }
-
-  /* SIDEBAR */
-  .sidebar{
-    width:240px;
-    background:var(--sidebar);
-    padding:20px 0;
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    border-right:4px solid black;
-  }
-
-  .sidebar a{
-    padding:10px 20px;
-    display:block;
-    color:black;
-    font-weight:bold;
-    text-decoration:none;
-  }
-
-  .sidebar a:hover{
-    background:#53004f;
-    color:var(--sidebar);
-  }
-
-  /* CONTENIDO */
-  .container{
-    margin-left:260px;
-    padding:30px;
-    width:calc(100% - 260px);
-  }
-
-  h2{
-    text-align:center;
-    margin-bottom:20px;
-    text-shadow:2px 2px 5px black;
-  }
-
-  .pago-box{
-    width:55%;
-    margin:auto;
-    background:#4b0a63;
-    padding:30px;
-    border-radius:15px;
-    border:3px solid var(--sidebar);
-    box-shadow:0 0 10px black;
-  }
-
-  .total{
-    text-align:center;
-    font-size:26px;
-    margin-bottom:25px;
-    font-weight:bold;
-    background:#3a074d;
-    padding:12px;
-    border-radius:10px;
-    border:2px solid var(--sidebar);
-  }
-
-  .metodo{
-    background:#3a074d;
-    border:2px solid var(--sidebar);
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:15px;
-    cursor:pointer;
-    font-size:18px;
-  }
-
-  .metodo input{
-    margin-right:10px;
-    transform:scale(1.2);
-  }
-
-  .acciones{
-    display:flex;
-    justify-content:space-between;
-    margin-top:30px;
-    gap:20px;
-  }
-
-  .btn{
-    width:100%;
-    padding:14px;
-    font-size:18px;
-    font-weight:bold;
-    border-radius:10px;
-    cursor:pointer;
-    border:2px solid black;
-  }
-
-  .btn-cancelar{
-    background:#ff4d4d;
-    color:white;
-  }
-
-  .btn-confirmar{
-    background:var(--sidebar);
-    color:black;
-  }
-
-  .btn:hover{
-    opacity:0.9;
-  }
-</style>
 </head>
-
+<script src="https://www.paypal.com/sdk/js?client-id=Aaxj34kYQuy2CPFtLIBgPKcRNHz1WSWXHjbauJf50Bb7qolE1ohL7SsomIz_cYbJD2AcBbXEXc3BErLb&currency=MXN"></script>
 <body>
 
 <!-- SIDEBAR -->
@@ -166,67 +46,11 @@
       <button class="btn btn-confirmar" onclick="confirmarPago()">Confirmar Pago</button>
     </div>
 
-  </div>
+    <div id="paypal-button-container"></div>
 
 </div>
 
-<script>
-/* ==============================
-   CALCULAR TOTAL
-============================== */
-
-const precios = {
-  ninos: 55,
-  adultos: 85,
-  estudiantes: 65,
-  mayores: 60
-};
-
-const datos = JSON.parse(localStorage.getItem("boletos")) || {};
-let total =
-  (datos.ninos || 0) * precios.ninos +
-  (datos.adultos || 0) * precios.adultos +
-  (datos.estudiantes || 0) * precios.estudiantes +
-  (datos.mayores || 0) * precios.mayores;
-
-document.getElementById("total").textContent = `$${total} MXN`;
-
-/* ==============================
-   CANCELAR
-============================== */
-function cancelarCompra(){
-  alert("❌ La compra ha sido cancelada.");
-  localStorage.removeItem("asientosTemporal");
-  window.location.href = "Pagina Principal.html";
-}
-
-/* ==============================
-   CONFIRMAR
-============================== */
-function confirmarPago(){
-  const metodo = document.querySelector('input[name="pago"]:checked');
-
-  if(!metodo){
-    alert("Seleccione un método de pago.");
-    return;
-  }
-
-  // Guardar asientos como ocupados
-  const ocupados = JSON.parse(localStorage.getItem("asientosOcupados")) || [];
-  const temporal = JSON.parse(localStorage.getItem("asientosTemporal")) || [];
-
-  localStorage.setItem(
-    "asientosOcupados",
-    JSON.stringify([...ocupados, ...temporal])
-  );
-
-  localStorage.removeItem("asientosTemporal");
-
-  alert("✅ Venta confirmada\nMétodo de pago: " + metodo.value);
-
-  window.location.href = "Pagina Principal.html";
-}
-</script>
+<script src="js/pago.js"></script>
 
 </body>
 </html>

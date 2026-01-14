@@ -1,0 +1,144 @@
+  :root{
+    --bg:#3d0652;           
+    --sidebar:#f1e208;      
+    --radius:12px;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:white;
+    display:flex;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:240px;
+    background:var(--sidebar);
+    padding:20px 0;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    border-right:4px solid black;
+  }
+
+  .sidebar a{
+    padding:10px 20px;
+    display:block;
+    color:black;
+    font-weight:bold;
+    text-decoration:none;
+  }
+
+  /* Contenido */
+  .container{
+    margin-left:260px;
+    padding:20px;
+    width:calc(100% - 260px);
+  }
+
+  h2{
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  .info-boletos{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:20px;
+  }
+
+  /* Pantalla */
+  .screen{
+    width:70%;
+    background:white;
+    color:black;
+    margin:auto;
+    text-align:center;
+    padding:10px;
+    border-radius:20px;
+    font-weight:bold;
+    margin-top:10px;
+    margin-bottom:35px;
+    box-shadow:0 0 20px #fff;
+  }
+
+  /* Sala RECTANGULAR */
+  #sala{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .fila{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:10px;
+    gap:10px;
+  }
+
+  .fila-label{
+    width:40px;
+    color:#f1e208;
+    font-weight:bold;
+    text-align:center;
+    margin-right:10px;
+    font-size:18px;
+  }
+
+  .seat{
+    width:35px;
+    height:35px;
+    background:#666;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:6px;
+    cursor:pointer;
+    user-select:none;
+    border:2px solid black;
+    color:white;
+    font-size:13px;
+    transition:0.2s;
+  }
+
+  .seat:hover{
+    transform:scale(1.15);
+  }
+
+  .selected{
+    background:#ffd700;
+  }
+
+  .occupied{
+    background:red !important;
+    cursor:not-allowed;
+  }
+
+  .btn-confirmar{
+    margin-top:35px;
+    width:60%;
+    margin-left:20%;
+    padding:12px;
+    font-size:18px;
+    font-weight:bold;
+    background:var(--sidebar);
+    color:black;
+    border:2px solid black;
+    border-radius:10px;
+    cursor:pointer;
+  }
+
+  #leyenda{
+    text-align:center;
+    margin-top:30px;
+    font-size:18px;
+  }
+
+  #leyenda div{
+    margin:6px;
+  }

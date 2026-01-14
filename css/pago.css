@@ -1,0 +1,145 @@
+:root {
+  --bg: #3d0652;
+  --sidebar: #f1e208;
+  --radius: 12px;
+  --primary: #4b0a63;
+  --text-light: white;
+  --text-dark: black;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: var(--sidebar);
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-right: 4px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar a {
+  padding: 12px 20px;
+  display: block;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.sidebar a:hover {
+  background: #53004f;
+  color: var(--sidebar);
+}
+
+/* CONTENIDO */
+.container {
+  margin-left: 260px;
+  padding: 30px;
+  width: calc(100% - 260px);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 5px black;
+}
+
+/* CAJA DE PAGO */
+.pago-box {
+  max-width: 600px;
+  margin: auto;
+  background: var(--primary);
+  padding: 30px;
+  border-radius: 15px;
+  border: 3px solid var(--sidebar);
+  box-shadow: 0 0 15px black;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.total {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 10px;
+  background: #3a074d;
+  border: 2px solid var(--sidebar);
+  margin-bottom: 15px;
+}
+
+/* MÉTODOS DE PAGO */
+.metodo {
+  background: #3a074d;
+  border: 2px solid var(--sidebar);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.metodo:hover {
+  background: #53004f;
+}
+
+.metodo input {
+  transform: scale(1.2);
+}
+
+/* BOTONES DE ACCIÓN */
+.acciones {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid black;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-cancelar {
+  background: #ff4d4d;
+  color: white;
+}
+
+.btn-confirmar {
+  background: var(--sidebar);
+  color: black;
+}
+
+/* PAYPAL BUTTON */
+#paypal-button-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
