@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Arial;
+}
+
+body {
+  margin: 0;
+  background: #0f172a;
+  color: #fff;
+}
+
+.header {
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.ticket {
+  background: #111827;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #0f172a;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket::before {
+  left: -10px;
+}
+
+.ticket::after {
+  right: -10px;
+}
+
+.ticket h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #facc15;
+}
+
+.ticket .info {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.qr {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.acciones {
+  margin-top: 30px;
+  text-align: center;
+}
+
+button {
+  background: #22c55e;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  margin: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+/* SOLO PARA IMPRESIÓN */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .header, .acciones {
+    display: none;
+  }
+
+  .ticket {
+    box-shadow: none;
+    border: 1px dashed #000;
+    page-break-inside: avoid;
+  }
+}

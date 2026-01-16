@@ -10,8 +10,6 @@
 
 <body>
 
-  <div id="welcomeBox"></div>
-
   <div class="center-wrap">
     <main class="card">
 
@@ -19,8 +17,11 @@
       <h2 class="subtitle">Registro</h2>
       <p class="lead">Crea tu cuenta para comenzar a usar la plataforma.</p>
 
-      
       <form onsubmit="handleRegister(event)">
+
+        <!-- ✅ ÚNICO CONTENEDOR DE MENSAJES -->
+        <div id="welcomeBox" class="msg-box"></div>
+
         <div class="form-group">
           <label for="name">Nombre completo</label>
           <input id="name" type="text" placeholder="Tu nombre completo" required>
@@ -50,7 +51,5 @@
   <script src="js/config.js"></script>
   <script src="js/register.js"></script>
 
-
 </body>
-
 </html>

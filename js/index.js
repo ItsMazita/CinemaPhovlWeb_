@@ -1,16 +1,8 @@
 async function handleLogin(e) {
   e.preventDefault();
 
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-
-  if (!emailInput || !passwordInput) {
-    alert("Error en el formulario");
-    return;
-  }
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   if (!email || !password) {
     alert("Completa todos los campos");
@@ -23,7 +15,7 @@ async function handleLogin(e) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }) 
     });
 
     const data = await res.json();
@@ -33,8 +25,9 @@ async function handleLogin(e) {
       return;
     }
 
-    // 🔐 Guardar sesión correctamente según tu API
     localStorage.setItem("token", data.token);
+    localStorage.setItem("id_usuario", data.id_usuario);
+
     localStorage.setItem(
       "user",
       JSON.stringify({
@@ -51,6 +44,7 @@ async function handleLogin(e) {
   }
 }
 
+localStorage.removeItem("tickets");
 function goToRegister() {
   window.location.href = "register.html";
 }

@@ -300,3 +300,109 @@
         opacity:0.3;
         pointer-events:none;
     }
+
+/* ===============================
+   BOTÓN HOY
+================================= */
+#fechaHoyBtn {
+  display: block;
+  width: 100%;
+  background: var(--morado);
+  color: var(--dorado);
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  border: 2px solid var(--dorado);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+#fechaHoyBtn:hover {
+  background: #2e0440;
+}
+
+/* ===============================
+   SEMANA DE 7 DÍAS
+================================= */
+.week button {
+  flex: 1;
+  padding: 8px 0;
+  background: #555;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.week button.activo {
+  background: var(--dorado);
+  color: black;
+  border-color: black;
+}
+
+.week button:hover:not(.activo) {
+  background: #633080;
+}
+
+/* ===============================
+   MINI CALENDARIO (DROPDOWN)
+================================= */
+.mini-calendar {
+  background: var(--morado);
+  padding: 15px;
+  border-radius: 12px;
+  color: var(--dorado);
+  display: none; /* se muestra al click en Hoy */
+  margin-top: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 10;
+}
+
+.mini-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mini-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--dorado);
+  cursor: pointer;
+}
+
+.calendar-grid button {
+  padding: 8px 0;
+  border-radius: 6px;
+  background: #4b0a63; 
+  color: var(--dorado);
+  font-weight: bold;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.calendar-grid button:hover:not(:disabled) {
+  background: #633080;
+}
+
+.calendar-grid button.selected-day {
+  background: var(--dorado);
+  color: black;
+  border-color: black;
+}
+
+.calendar-grid button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}

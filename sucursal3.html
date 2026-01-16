@@ -3,46 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="css/sucursal.css"/>
   <title>Sucursal 3 - Cinema PHOVL</title>
+  <link rel="stylesheet" href="css/sucursal.css" />
 </head>
 
 <body data-sucursal="3">
 
-<div class="sidebar" id="sidebarPanel">
-  <div class="logo" id="toggleMenu">🎬 Cinema PHOVL</div>
-
-  <div class="menu-items" id="menuItems">
-    <a href="Pagina Principal.html">Inicio</a>
-
-    <div class="dropdown">
-      <button>Sucursales ▼</button>
-      <div class="dropdown-content">
-        <a href="sucursal1.html">Sucursal 1</a>
-        <a href="sucursal2.html">Sucursal 2</a>
-        <a href="sucursal3.html">Sucursal 3</a>
+  <div class="sidebar" id="sidebarPanel">
+    <div class="logo" id="toggleMenu">🎬 Cinema PHOVL</div>
+    <div class="menu-items" id="menuItems">
+      <a href="Pagina Principal.html">Inicio</a>
+      <div class="dropdown">
+        <button>Sucursales ▼</button>
+        <div class="dropdown-content">
+          <a href="sucursal1.html">Sucursal 1</a>
+          <a href="sucursal2.html">Sucursal 2</a>
+          <a href="sucursal3.html">Sucursal 3</a>
+        </div>
       </div>
+      <a href="perfil.html">Perfil</a>
+      <a href="index.html">Cerrar sesión</a>
     </div>
-
-    <a href="perfil.html">Perfil</a>
-    <a href="index.html">Cerrar sesión</a>
   </div>
-</div>
 
+  <div class="container">
+    <h2>Sucursal 3</h2>
+    <p>Bienvenido a la Sucursal 3s de Cinema PHOVL</p>
 
-<div class="container">
-
-  <h2>Sucursal 3</h2>
-  <p>Bienvenido a la Sucursal 3 de Cinema PHOVL</p>
-
-
-  <div class="calendar-container">
-
-    <button id="monthButton"></button>
+    <button id="fechaHoyBtn" class="fecha-hoy"></button>
 
     <div class="week" id="weekDays"></div>
 
-    <div class="mini-calendar" id="miniCalendar">
+    <div class="mini-calendar" id="miniCalendar" style="display:none;">
       <div class="mini-header">
         <button id="prev">&lt;</button>
         <span id="miniMonth"></span>
@@ -51,15 +43,9 @@
       <div class="calendar-grid" id="calendarGrid"></div>
     </div>
 
+    <div id="cartelera"></div>
   </div>
 
-
-  <div id="cartelera"></div>
-
-</div>
-
-
-<script src="js/sucursal.js"></script>
-
+  <script src="js/sucursal.js"></script>
 </body>
 </html>

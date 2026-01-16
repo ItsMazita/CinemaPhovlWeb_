@@ -9,13 +9,11 @@
 <script src="https://www.paypal.com/sdk/js?client-id=Aaxj34kYQuy2CPFtLIBgPKcRNHz1WSWXHjbauJf50Bb7qolE1ohL7SsomIz_cYbJD2AcBbXEXc3BErLb&currency=MXN"></script>
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <a href="Pagina Principal.html">Inicio</a>
   <a href="seleccion_asientos.html">Volver</a>
 </div>
 
-<!-- CONTENIDO -->
 <div class="container">
 
   <h2>Confirmación de Pago</h2>
@@ -23,28 +21,6 @@
   <div class="pago-box">
 
     <div id="total" class="total">$0 MXN</div>
-
-    <h3>Selecciona tu método de pago</h3>
-
-    <label class="metodo">
-      <input type="radio" name="pago" value="Tarjeta">
-      💳 Tarjeta de Crédito / Débito
-    </label>
-
-    <label class="metodo">
-      <input type="radio" name="pago" value="Efectivo">
-      💵 Pago en efectivo en sucursal
-    </label>
-
-    <label class="metodo">
-      <input type="radio" name="pago" value="Transferencia">
-      🏦 Transferencia bancaria
-    </label>
-
-    <div class="acciones">
-      <button class="btn btn-cancelar" onclick="cancelarCompra()">Cancelar Compra</button>
-      <button class="btn btn-confirmar" onclick="confirmarPago()">Confirmar Pago</button>
-    </div>
 
     <div id="paypal-button-container"></div>
 

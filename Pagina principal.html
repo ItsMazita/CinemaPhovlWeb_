@@ -9,7 +9,6 @@
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebarPanel">
   <div class="logo" id="toggleMenu">🎬 Cinema PHOVL</div>
 
@@ -30,20 +29,34 @@
   </div>
 </div>
 
-<!-- CONTENIDO -->
 <div class="container">
 
-<h2 style="color:#d8b000">Estrenos</h2>
-<div class="carousel-wrapper">
-<button class="arrow arrow-left" onclick="moveSlide(-1)">&#10094;</button>
-<button class="arrow arrow-right" onclick="moveSlide(1)">&#10095;</button>
-
-  <div class="carousel-container">
-    <div class="carousel-slide" id="carouselEstrenos"></div>
+  <div class="carousel-section">
+    <h2>Estrenos</h2>
+    <div class="carousel-wrapper">
+      <button class="arrow arrow-left" onclick="moveSlide('estrenos', -1)">&#10094;</button>
+      <div id="carrusel-estrenos" class="carrusel"></div>
+      <button class="arrow arrow-right" onclick="moveSlide('estrenos', 1)">&#10095;</button>
+    </div>
   </div>
 
+  <div class="carousel-section">
+    <h2>Preventa</h2>
+    <div class="carousel-wrapper">
+      <button class="arrow arrow-left" onclick="moveSlide('preventa', -1)">&#10094;</button>
+      <div id="carrusel-preventa" class="carrusel"></div>
+      <button class="arrow arrow-right" onclick="moveSlide('preventa', 1)">&#10095;</button>
+    </div>
+  </div>
 
-</div>
+  <div class="carousel-section">
+    <h2>Reestrenos</h2>
+    <div class="carousel-wrapper">
+      <button class="arrow arrow-left" onclick="moveSlide('reestrenos', -1)">&#10094;</button>
+      <div id="carrusel-reestrenos" class="carrusel"></div>
+      <button class="arrow arrow-right" onclick="moveSlide('reestrenos', 1)">&#10095;</button>
+    </div>
+  </div>
 
 </div>
 

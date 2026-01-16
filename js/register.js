@@ -7,9 +7,6 @@ async function handleRegister(e) {
 
   const nombre = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const telefono = document.getElementById("telefono")
-    ? document.getElementById("telefono").value.trim()
-    : null;
   const password = document.getElementById("password").value;
   const confirm = document.getElementById("confirmPassword").value;
 
@@ -30,7 +27,6 @@ async function handleRegister(e) {
       body: JSON.stringify({
         nombre,
         email,
-        telefono,
         password
       })
     });
@@ -45,7 +41,7 @@ async function handleRegister(e) {
     msgBox.textContent = "✅ Registro exitoso 🎉 Redirigiendo al login...";
 
     setTimeout(() => {
-      window.location.href = "index.html"; // login
+      window.location.href = "index.html"; 
     }, 1500);
 
   } catch (error) {
